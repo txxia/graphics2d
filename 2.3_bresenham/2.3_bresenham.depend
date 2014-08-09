@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1407555119 source:/home/xteven/github/graphics/2.3_bresenham/main.c
+	<SDL2/SDL.h>
+	"raster_scan.h"
+
+1407553320 /home/xteven/github/graphics/2.3_bresenham/raster_scan.h
+	"raster_scan.c"
+
+1407553734 /home/xteven/github/graphics/2.3_bresenham/raster_scan.c
+	<stdio.h>
+	<ctype.h>
+	<stdlib.h>
+	<string.h>
+	<SDL2/SDL.h>
+
