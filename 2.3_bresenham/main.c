@@ -4,6 +4,11 @@
 #define HEIGHT 480
 
 #define Sign(x) (((x)>0)-((x)<0))
+#define DELAY 5
+
+#define mh(x,y,d) do{(x)++;(d)+=2*(x)+1;}while(0)             // move horizontally
+#define md(x,y,d) do{(x)++;(y)--;(d)+=2*(x)-2*(y)+2;}while(0) // move diagonally
+#define mv(x,y,d) do{(y)--;(d)-=2*(y)+1;}while(0)             // move vertically
 
 /* Bresenham's line rasterization algorithm for the first octant */
 void bresenhamFloatOctant(SDL_Renderer *renderer, int x1, int y1, int x2, int y2) {
@@ -21,14 +26,14 @@ void bresenhamFloatOctant(SDL_Renderer *renderer, int x1, int y1, int x2, int y2
 
     // begin main loop
     for(int i = 0; i <= dx; i++) {
-        setPixel(renderer, (int)x, (int)y, parseColor("0x0000ff11"));
+        setPixel(renderer, (int)x, (int)y, parseColor("0xff0000"));
         while(e > 0) {
             y++;
             e--;
         }
         x++;
         e += m;
-        SDL_Delay(10);
+        SDL_Delay(DELAY);
     }
 
 }
@@ -48,14 +53,14 @@ void bresenhamIntegerOctant(SDL_Renderer *renderer, int x1, int y1, int x2, int 
 
     // begin main loop
     for(int i = 0; i <= dx; i++) {
-        setPixel(renderer, (int)x, (int)y, parseColor("0x0000ff11"));
+        setPixel(renderer, (int)x, (int)y, parseColor("0x0000ff"));
         while(e > 0) {
             y++;
             e -= 2 * dx;
         }
         x++;
         e += 2 * dy;
-        SDL_Delay(10);
+        SDL_Delay(DELAY);
     }
 }
 
@@ -87,7 +92,7 @@ void bresenhamInteger(SDL_Renderer *renderer, int x1, int y1, int x2, int y2) {
 
     // begin main loop
     for(int i = 0; i <= dx; i++) {
-        setPixel(renderer, (int)x, (int)y, parseColor("0x0000ff11"));
+        setPixel(renderer, (int)x, (int)y, parseColor("0x00dddd"));
         while(e > 0) {
             if(interchanged) x += s1;
             else             y += s2;
@@ -96,22 +101,49 @@ void bresenhamInteger(SDL_Renderer *renderer, int x1, int y1, int x2, int y2) {
         if(interchanged) y += s2;
         else             x += s1;
         e += 2 * dy;
-        SDL_Delay(10);
+        SDL_Delay(DELAY);
+    }
+}
+
+/* Bresenham's incremental circle algorithm for the first quadrant */
+void bresenhamCircle(SDL_Renderer *renderer, int rad){
+    // initialize the variables
+    int xi = 0,
+        yi = rad,
+        di = 2*(1-rad),
+        limit = 0,
+        diff_dist;
+    while(yi >= limit){
+        setPixel(renderer, xi, yi, parseColor("#006600"));
+        if(di<0){
+            diff_dist = 2*di+2*yi-1;
+            if (diff_dist <= 0) mh(xi, yi, di);     // case1
+            else                md(xi, yi, di);     // case2
+        } else if (di > 0){
+            diff_dist = 2*di-2*xi-1;
+            if (diff_dist <= 0) md(xi, yi, di);     // case4
+            else                mv(xi, yi, di);     // case5
+        } else                  md(xi, yi, di);     // case3
+        SDL_Delay(DELAY);
     }
 }
 
 void draw(SDL_Renderer *renderer){
 
-    // using bresenham's float algorithm
+    // bresenham's float algorithm
     bresenhamFloatOctant(renderer, 5, 10, 55, 30);
 
-    // using bresenham's integer algorithm
+    // bresenham's integer algorithm
     bresenhamIntegerOctant(renderer, 5, 15, 55, 35);
 
-    // using general bresenham's algorithm
+    // general bresenham's algorithm
     bresenhamInteger(renderer, 5, 30, 55, 15);
     bresenhamInteger(renderer, 5, 45, 55, 0);
     bresenhamInteger(renderer, 15, 45, 45, 0);
+
+    // bresenham's circle algorithm
+    for(int i=4;i<38;i+=(40-i)/3)
+        bresenhamCircle(renderer, i);
 }
 
 int main(int argc, char *argv[]) {
