@@ -15,25 +15,19 @@ void draw(SDL_Renderer *renderer, int x1, int y1, int x2, int y2){
     float dx = x2-x1,
           dy = y2-y1,
           m = dy/dx;
-
-    // approximate the line length
-    int length = (abs(x2-x1) >= abs(y2-y1)) ? abs(x2-x1) : abs(y2-y1);
-
-    // select the larger of dx or dy to be one raster unit
-    float dx = (x2-x1)/(float)length,
-          dy = (y2-y1)/(float)length;
-
-    // round the values rather than truncate, so that center pixel addressing
-    // is handled correctly
-    float x = x1+0.5,
-          y = y1+0.5;
+    // initialize e to compensate for a nonzero intercept
+    float e = m-0.5;
 
     // begin main loop
-    for(int i=0; i<=length; i++){
+    for(int i=0; i<=dx; i++){
         setPixel(renderer, (int)x, (int)y, parseColor("0x0000ff11"));
-        x += dx;
-        y += dy;
-        SDL_Delay(10);
+        while(e>0){
+            y++;
+            e--;
+        }
+        x++;
+        e += m;
+        SDL_Delay(20);
     }
 
 }
@@ -62,7 +56,7 @@ int main(int argc, char *argv[]) {
     drawGrid(pRenderer, WIDTH, HEIGHT);
 
     // default drawing function
-    draw(pRenderer, 80, 60, 4, 7);
+    draw(pRenderer, 0, 0, 50, 20);
 
     // The window is open: enter program loop
     while(loop) {

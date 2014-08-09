@@ -59,7 +59,7 @@ SDL_Color parseColor(char *str) {
         Uint32 c = strtol(code, NULL, 16);
         dbg("%08x \t", c);
 
-        if(strlen(code) == strlen("0x000000")) {       /* RGB mode */
+        if(strlen(code) == strlen("0x000000")) {
             dbg("RGB\t");
             color.r = (c >> 16) & 255;
             color.g = (c >> 8) & 255;
