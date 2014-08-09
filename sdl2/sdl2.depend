@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1407542121 source:/home/xteven/Dropbox/graphics/sdl2/main.c
+	<SDL2/SDL.h>
+	"raster_scan.h"
+
+1407542112 /home/xteven/Dropbox/graphics/sdl2/raster_scan.h
+	"raster_scan.c"
+
+1407543552 /home/xteven/Dropbox/graphics/sdl2/raster_scan.c
+	<stdio.h>
+	<ctype.h>
+	<stdlib.h>
+	<string.h>
+	<SDL2/SDL.h>
+
