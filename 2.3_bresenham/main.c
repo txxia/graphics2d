@@ -166,11 +166,11 @@ int main(int argc, char *argv[]) {
     // Clear winow
     SDL_RenderClear(pRenderer);
 
-    // Render grid
+    // standard drawing function
+    drawGrid(pRenderer, WIDTH, HEIGHT);
+    draw(pRenderer);
     drawGrid(pRenderer, WIDTH, HEIGHT);
 
-    // standard drawing function
-    draw(pRenderer);
 
     // The window is open: enter program loop
     while(loop) {

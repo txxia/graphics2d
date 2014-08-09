@@ -22,7 +22,7 @@ int drawLine(SDL_Renderer *renderer, int x1, int y1, int x2, int y2) {
 }
 
 void drawGrid(SDL_Renderer *renderer, unsigned int width, unsigned int height){
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 160, 160, 160, 255);
     for(int x = 0; x < width; x += UNITSIZE) {
         SDL_RenderDrawLine(renderer, x, 0, x, height);
     }
