@@ -37,16 +37,16 @@
 		<Unit filename="Stack.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Stack.h" />
+		<Unit filename="Stack.h">
+			<Option compilerVar="Cc" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="raster_scan.c">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="raster_scan.h" />
-		<Unit filename="test.c">
+		<Unit filename="raster_scan.h">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

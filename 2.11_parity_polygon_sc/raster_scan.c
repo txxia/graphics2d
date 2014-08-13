@@ -2,8 +2,8 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
-#include <SDL2/SDL.h>
 
+#include "raster_scan.h"
 //#define DEBUG
 
 #ifndef DEBUG
@@ -11,8 +11,6 @@
 #else
 #  define dbg(fmt, ...) fprintf(stderr, "DEBUG %s:%d: " fmt "\n", __FILE__, __LINE__, ##__VA_ARGS__)
 #endif
-
-#define UNITSIZE 10
 
 int drawLine(SDL_Renderer *renderer, int x1, int y1, int x2, int y2) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -44,6 +42,7 @@ int setPixel(SDL_Renderer *renderer, int x, int y, SDL_Color color) {
 
     // Present render to the screen
     SDL_RenderPresent(renderer);
+    return 0;
 }
 
 SDL_Color parseColor(char *str) {
