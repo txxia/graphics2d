@@ -12,7 +12,9 @@
 #  define dbg(fmt, ...) fprintf(stderr, "DEBUG %s:%d: " fmt "\n", __FILE__, __LINE__, ##__VA_ARGS__)
 #endif
 
-int drawLine(SDL_Renderer *renderer, int x1, int y1, int x2, int y2) {
+void drawLine(SDL_Renderer *renderer,
+              unsigned int x1, unsigned int y1,
+              unsigned int x2, unsigned int y2) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
     // Present render to the screen
@@ -32,7 +34,9 @@ void drawGrid(SDL_Renderer *renderer, unsigned int width, unsigned int height){
 }
 
 /* RGBA color*/
-int setPixel(SDL_Renderer *renderer, int x, int y, SDL_Color color) {
+void setPixel(SDL_Renderer *renderer,
+              unsigned int x, unsigned int y,
+              SDL_Color color) {
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
     SDL_Rect rect;
     rect.h = rect.w = UNITSIZE - 1;
@@ -42,7 +46,6 @@ int setPixel(SDL_Renderer *renderer, int x, int y, SDL_Color color) {
 
     // Present render to the screen
     SDL_RenderPresent(renderer);
-    return 0;
 }
 
 SDL_Color parseColor(char *str) {
@@ -66,7 +69,6 @@ SDL_Color parseColor(char *str) {
             color.a = 255;
         } else if(strlen(code) == strlen("0x00000000")) {
             dbg("RGBA\t");
-            SDL_Color color;
             color.r = (c >> 24) & 255;
             color.g = (c >> 16) & 255;
             color.b = (c >> 8) & 255;

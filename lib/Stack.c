@@ -56,3 +56,11 @@ void stack_delete(Stack* aStack){
         stack_clear(aStack);
     free(aStack);
 }
+
+StackData stack_data(float x, float y) {
+    StackData data;
+    data.x = x;
+    data.y = y;
+    return data;
+}
+

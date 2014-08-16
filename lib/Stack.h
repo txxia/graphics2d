@@ -5,14 +5,13 @@
 * Stack implementation with easily changeable data type.
 */
 
-/* Data structure */
+/* Node structure */
+typedef struct _stack Stack;
+
 typedef struct _stack_data{
     float x;
     float y;
 } StackData;
-
-/* Node structure */
-typedef struct _stack Stack;
 
 /* Create an empty stack. */
 extern Stack* stack_init(void);
@@ -36,5 +35,8 @@ extern void stack_clear(Stack* aStack);
 
 /* Delete the entire stack. (makes the ptr to the stack dangling) */
 extern void stack_delete(Stack* aStack);
+
+/* constructor for stack data */
+extern StackData stack_data(float x, float y);
 
 #endif

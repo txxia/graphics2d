@@ -3,15 +3,18 @@
 
 #include <SDL2/SDL.h>
 
-#define WIDTH 1280
-#define HEIGHT 720
 #define UNITSIZE 10
 
-extern int drawLine(SDL_Renderer *renderer, int x1, int y1, int x2, int y2);
+extern void drawLine(SDL_Renderer *renderer,
+                     unsigned int x1, unsigned int y1,
+                     unsigned int x2, unsigned int y2);
 
-extern int initGrid(SDL_Renderer *renderer, int width, int height);
+extern void drawGrid(SDL_Renderer *renderer,
+                     unsigned int width, unsigned int height);
 
-extern int setPixel(SDL_Renderer *renderer, int x, int y, SDL_Color color);
+extern void setPixel(SDL_Renderer *renderer,
+                     unsigned int x, unsigned int y,
+                     SDL_Color color);
 
 extern SDL_Color parseColor(char *str);        /* parse from string containing RGB/RGBA value */
 
