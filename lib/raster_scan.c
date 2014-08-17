@@ -78,6 +78,15 @@ SDL_Color parseColor(char *str) {
     return color;
 }
 
+SDL_Color int2Color(Uint32 i){
+    SDL_Color color;
+    color.a = (i >> 24) & 255;
+    color.r = (i >> 16) & 255;
+    color.g = (i >> 8) & 255;
+    color.b = (i) & 255;
+    return color;
+}
+
 unsigned int toPixel(unsigned int i){
     return i*UNITSIZE + UNITSIZE/2;
 }

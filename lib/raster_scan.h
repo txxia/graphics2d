@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-#define UNITSIZE 10
+#define UNITSIZE 8
 
 extern void drawLine(SDL_Renderer *renderer,
                      unsigned int x1, unsigned int y1,
@@ -17,6 +17,8 @@ extern void setPixel(SDL_Renderer *renderer,
                      SDL_Color color);
 
 extern SDL_Color parseColor(char *str);        /* parse from string containing RGB/RGBA value */
+
+extern SDL_Color int2Color(Uint32 i);
 
 extern unsigned int toPixel(unsigned int i);   /* convert real coordinate to virtual coordinate */
 
