@@ -1,9 +1,5 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
-
-#include <pthread.h>
-#include <semaphore.h>
-
 #include <time.h>
 #include "../lib/raster_scan.h"
 #include "../lib/bresenham.h"
@@ -13,10 +9,10 @@
 
 #define BWIDTH 40
 #define BHEIGHT 30
-#define DELAY 0
+#define DELAY 1
 
 SDL_Renderer* pRenderer;
-int **boundaries;
+bool **boundaries;
 SDL_Color currColor;
 
 void setPix(int x, int y){
@@ -27,28 +23,21 @@ void setPix(int x, int y){
 void draw(){
     // boundary pixels
     inline void savePix(int x, int y){
-        boundaries[x][y] = 1;
+        boundaries[x][y] = true;
         setPixel(pRenderer, x, y, parseColor("#000000"));
     }
-    boundaries = (int **)malloc(BWIDTH*sizeof(int*));
+    boundaries = (bool **)malloc(BWIDTH*sizeof(bool*));
     for(int i=0; i<BWIDTH; i++){
-        boundaries[i] = (int *)calloc(BHEIGHT, sizeof(int));
+        boundaries[i] = (bool *)calloc(BHEIGHT, sizeof(bool));
     }
     bresenhamInteger(0, 0, 4, 18, savePix);
     bresenhamInteger(0, 0, 18, 4, savePix);
     bresenhamInteger(4, 18, 18, 4, savePix);
 
-    bresenhamInteger(18, 6, 33, 2, savePix);
-    bresenhamInteger(33, 2, 37, 17, savePix);
-    bresenhamInteger(37, 17, 22, 21, savePix);
-    bresenhamInteger(22, 21, 18, 6, savePix);
-
-    // seed fill
-    currColor = int2Color(rand());
-    seedFillSimple4cBFS(1, 1,
-                     0, 0, 0+BWIDTH-1, 0+BHEIGHT-1,
-                     boundaries, setPix);
-
+    bresenhamInteger(15, 10, 30, 6, savePix);
+    bresenhamInteger(30, 6, 34, 21, savePix);
+    bresenhamInteger(34, 21, 19, 25, savePix);
+    bresenhamInteger(19, 25, 15, 10, savePix);
 }
 
 int main(int argc, char *argv[]) {
@@ -84,9 +73,16 @@ int main(int argc, char *argv[]) {
             int px = toUnit(event.button.x);
             int py = toUnit(event.button.y);
             if(!boundaries[py][px]){
+                // seed fill
                 currColor = int2Color(rand());
-                seedFillSimple4cBFS(px, py, 0, 0, 0+BWIDTH-1, 0+BHEIGHT-1,
-                                    boundaries, setPix);
+                // left button triggers BFS seed filling
+                if(event.button.button == SDL_BUTTON_LEFT)
+                    seedFillSimple4cBFS(px, py, 0, 0, 0+BWIDTH-1, 0+BHEIGHT-1,
+                                        boundaries, setPix);
+                // other buttons trigger DFS seed filling
+                else
+                    seedFillSimple4c(px, py, 0, 0, 0+BWIDTH-1, 0+BHEIGHT-1,
+                                        boundaries, setPix);
             }
         }
         if(event.type == SDL_QUIT){

@@ -9,7 +9,7 @@
 void seedFillSimple4c(int sx, int sy,
                       const int bx1, const int by1,
                       const int bx2, const int by2,
-                      int** boundaries,
+                      bool** boundaries,
                       void (*callback)(int, int)){
     int X = bx2-bx1+1,    // width of the box
         Y = by2-by1+1;    // height of the box
@@ -17,9 +17,9 @@ void seedFillSimple4c(int sx, int sy,
     StackData pixel;
     // keeps track of pixels visited
 
-    int **pixMap = (int **)malloc(X*sizeof(int*));
+    bool **pixMap = (bool **)malloc(X*sizeof(bool*));
     for(int i=0; i<X; i++){
-        pixMap[i] = (int *)calloc(Y, sizeof(int));
+        pixMap[i] = (bool *)calloc(Y, sizeof(bool));
     }
 
     // initialize stack
@@ -38,7 +38,7 @@ void seedFillSimple4c(int sx, int sy,
             ry = sy-by1;        // relative y coord
 
         if(!pixMap[rx][ry]){
-            pixMap[rx][ry] = 1;
+            pixMap[rx][ry] = true;
             callback(sx, sy);
         }
         // examine the surrounding pixels to see if they should be placed
@@ -63,7 +63,7 @@ void seedFillSimple4c(int sx, int sy,
 void seedFillSimple4cBFS(int sx, int sy,
                       const int bx1, const int by1,
                       const int bx2, const int by2,
-                      int** boundaries,
+                      bool** boundaries,
                       void (*callback)(int, int)){
 
     int X = bx2-bx1+1,    // width of the box
@@ -72,9 +72,9 @@ void seedFillSimple4cBFS(int sx, int sy,
     QueueData pixel;
     // keeps track of pixels visited
 
-    int **pixMap = (int **)malloc(X*sizeof(int*));
+    bool **pixMap = (bool **)malloc(X*sizeof(bool*));
     for(int i=0; i<X; i++){
-        pixMap[i] = (int *)calloc(Y, sizeof(int));
+        pixMap[i] = (bool *)calloc(Y, sizeof(bool));
     }
 
     // initialize queue
@@ -94,7 +94,7 @@ void seedFillSimple4cBFS(int sx, int sy,
             ry = sy-by1;        // relative y coord
 
         if(!pixMap[rx][ry]){
-            pixMap[rx][ry] = 1;
+            pixMap[rx][ry] = true;
             callback(sx, sy);
         }
         // examine the surrounding pixels to see if they should be placed

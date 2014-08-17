@@ -6,7 +6,13 @@
 extern void seedFillSimple4c(int sx, int sy,
                              const int bx1, const int by1,  // box of boundary, all inclusive
                              const int bx2, const int by2,
-                             int** boundaries,              // boundary pix are set to 1
+                             bool** boundaries,              // boundary pix are set to 1
+                             void (*callback)(int, int));
+
+extern void seedFillSimple4cBFS(int sx, int sy,
+                             const int bx1, const int by1,  // box of boundary, all inclusive
+                             const int bx2, const int by2,
+                             bool** boundaries,              // boundary pix are set to 1
                              void (*callback)(int, int));
 
 #endif
