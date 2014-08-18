@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include "../lib/raster_scan.h"
+#include "../lib/color.h"
 #include "../lib/DDA.h"
 #define WIDTH 640
 #define HEIGHT 480

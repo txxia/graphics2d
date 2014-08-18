@@ -16,10 +16,6 @@ extern void setPixel(SDL_Renderer *renderer,
                      unsigned int x, unsigned int y,
                      SDL_Color color);
 
-extern SDL_Color parseColor(char *str);        /* parse from string containing RGB/RGBA value */
-
-extern SDL_Color int2Color(Uint32 i);
-
 extern unsigned int toPixel(unsigned int i);   /* convert real coordinate to virtual coordinate */
 
 extern unsigned int toUnit(unsigned int i);    /* convert virtual coordinate to real coordinate */

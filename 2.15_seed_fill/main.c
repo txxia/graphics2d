@@ -3,6 +3,7 @@
 #include <time.h>
 #include "../lib/raster_scan.h"
 #include "../lib/bresenham.h"
+#include "../lib/color.h"
 #include "../lib/fill_seed.h"
 #define WIDTH 320
 #define HEIGHT 240

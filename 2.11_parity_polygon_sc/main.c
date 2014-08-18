@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include "../lib/raster_scan.h"
 #include "../lib/Stack.h"
+#include "../lib/color.h"
 #include "../lib/fill_polygon.h"
 #define DELAY 8
 #define WIDTH 480
