@@ -71,7 +71,7 @@ void bresenhamInteger(int x1, int y1, int x2, int y2,
 
     // begin main loop
     for(int i = 0; i <= dx; i++) {
-        callback((int)x, (int)y);
+        callback(x, y);
         while(e > 0) {
             if(interchanged) x += s1;
             else             y += s2;

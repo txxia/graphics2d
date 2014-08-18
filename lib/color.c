@@ -1,5 +1,8 @@
-#include "color.h"
+#include <assert.h>
 #include "debug.h"
+
+#include "color.h"
+
 
 SDL_Color parseColor(char *str) {
     SDL_Color color;
@@ -38,4 +41,14 @@ SDL_Color int2Color(Uint32 i){
     color.g = (i >> 8) & 255;
     color.b = (i) & 255;
     return color;
+}
+
+SDL_Color interpolationLinear(SDL_Color a, SDL_Color b, double i){
+    assert(i>=0 && i<=1);
+    SDL_Color c;
+    c.a = (i)*a.a+(1-i)*b.a;
+    c.r = (i)*a.r+(1-i)*b.r;
+    c.g = (i)*a.g+(1-i)*b.g;
+    c.b = (i)*a.b+(1-i)*b.b;
+    return c;
 }

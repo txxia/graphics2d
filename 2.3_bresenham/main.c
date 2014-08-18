@@ -13,6 +13,12 @@ void setPix(int x, int y){
     setPixel(pRenderer, x, y, parseColor("#3333ee"));
     SDL_Delay(DELAY);
 }
+void setPixInterpolation(int x, int y, double i){
+    setPixel(pRenderer, x, y,
+             interpolationLinear(parseColor("#3333ee"),
+                                 parseColor("#000000"), i));
+    SDL_Delay(DELAY);
+}
 
 void draw(){
     // bresenham's float algorithm
@@ -32,6 +38,7 @@ void draw(){
     drawLine(pRenderer,
              toPixel(5), toPixel(45), toPixel(55), toPixel(0));
     bresenhamInteger(5, 45, 55, 0, setPix);
+
     drawLine(pRenderer,
              toPixel(15), toPixel(45), toPixel(45), toPixel(0));
     bresenhamInteger(15, 45, 45, 0, setPix);
